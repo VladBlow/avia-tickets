@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const SvgStore = require('webpack-svgstore-plugin');
 
 const hotMiddlewareScript =
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
@@ -30,6 +31,8 @@ module.exports = {
   resolve: {
     alias: {
       common: path.join(__dirname, '../src/common'),
+      features: path.join(__dirname, '../src/features'),
+      components: path.join(__dirname, '../src/common/components'),
     },
   },
   plugins: [
@@ -38,6 +41,19 @@ module.exports = {
       template: 'templates/index.html',
       filename: '../public/index.html',
       inject: 'body',
+    }),
+    new SvgStore({
+      prefix: '',
+      svgoOptions: {
+        plugins: [
+          {
+            removeTitle: true,
+          },
+          {
+            removeStyleElement: true,
+          },
+        ],
+      },
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),

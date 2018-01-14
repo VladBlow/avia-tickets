@@ -1,0 +1,1 @@
+export { applyGlobalStyles } from './applyGlobalStyles';

@@ -1,0 +1,15 @@
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <rect id="path-1" x="16" y="50" width="19" height="19" rx="3"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1024" transform="translate(-118.000000, -213.000000)">
+            <g id="Filter-–-Stop-Quantity" transform="translate(103.000000, 164.000000)">
+                <g id="Rectangle-218">
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#D2D5D6" stroke-width="1" x="15.5" y="49.5" width="20" height="20" rx="3"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
