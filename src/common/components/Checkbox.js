@@ -10,6 +10,13 @@ const Label = styled.label`
   &:last-child {
     margin-bottom: 0;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    opacity: 0.6;
+    cursor: not-allowed;
+  `};
 `;
 
 const Text = styled.span`
@@ -27,19 +34,24 @@ export class Checkbox extends Component {
     checked: this.props.checked || false,
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ checked: nextProps.checked });
+  }
+
   handleOnChange = ({ target: { checked } }) => this.setState({ checked });
 
   render() {
     const { checked } = this.state;
-    const { children, className, ...props } = this.props;
+    const { children, className, disabled, ...props } = this.props;
 
     return (
-      <Label className={className}>
+      <Label className={className} disabled={disabled}>
         <input
           type="checkbox"
           checked={checked}
           hidden
           onChange={this.handleOnChange}
+          disabled={disabled}
           {...props}
         />
         <Icon name={getIconName(checked)} size="19" />

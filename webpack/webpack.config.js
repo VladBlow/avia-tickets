@@ -30,6 +30,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      r: path.join(__dirname, '../src/_root'),
       common: path.join(__dirname, '../src/common'),
       features: path.join(__dirname, '../src/features'),
       components: path.join(__dirname, '../src/common/components'),
