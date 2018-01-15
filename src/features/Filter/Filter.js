@@ -16,7 +16,7 @@ const Title = styled.p`
 const StyledCheckbox = styled(Checkbox)`
   padding: 8px 15px;
 
-  &:hover {
+  :hover {
     background-color: #f1fcff;
   }
 `;
