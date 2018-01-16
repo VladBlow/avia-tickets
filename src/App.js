@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ColumnLayout, Cart, Icon } from 'components';
+import { ColumnLayout, Icon } from 'components';
 import { Filter } from 'features/Filter';
+import { Tickets } from 'features/Tickets';
 
 const Layout = styled.main`
-  width: 820px;
+  width: 818px;
   margin: 0 auto;
 `;
 
@@ -24,13 +25,6 @@ export const App = () => (
     <LogoWrap>
       <Icon name="logo" size="60" />
     </LogoWrap>
-    <ColumnLayout
-      sidebar={
-        <Cart>
-          <Filter />
-        </Cart>
-      }
-      content={<Cart withHover>321</Cart>}
-    />
+    <ColumnLayout sidebar={<Filter />} content={<Tickets />} />
   </Layout>
 );

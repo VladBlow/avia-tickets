@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Checkbox } from 'components';
+import { Checkbox, Cart } from 'components';
 
-const Wrap = styled.div`
+const Wrap = styled(Cart)`
   padding: 15px 0;
 `;
 

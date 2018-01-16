@@ -7,11 +7,11 @@ const Layout = styled.div`
 `;
 
 const Sidebar = styled.section`
-  width: 230px;
+  width: 232px;
 `;
 
 const Content = styled.section`
-  width: 570px;
+  width: 566px;
 `;
 
 export const ColumnLayout = ({ sidebar, content }) => (

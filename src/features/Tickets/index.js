@@ -1,2 +1,2 @@
-// export { TickersC as Tickets } from './container';
+export { TicketsC as Tickets } from './container';
 export { ticketsReducer } from './ducks';

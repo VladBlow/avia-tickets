@@ -32,7 +32,7 @@ const readyPromise = new Promise(resolve => {
 });
 
 // Serve static assets
-app.use('/assets', express.static('./assets'));
+app.use('/static', express.static('./static'));
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {

@@ -10,7 +10,6 @@ export const Cart = styled.div`
     `
     &:hover {
       box-shadow: 0 5px 25px 0 rgba(91, 137, 164, 0.1);
-      cursor: pointer;
     }
   `};
 `;
