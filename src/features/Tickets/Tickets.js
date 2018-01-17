@@ -14,16 +14,13 @@ export class Tickets extends Component {
   }
 
   render() {
-    // const { tickets, isLoading } = this.props;
+    const { tickets, isLoading } = this.props;
 
-    // if (isLoading) return <div>loading...</div>;
-
-    // return <div>{tickets.map(ticket => <Ticket ticket={ticket} />)}</div>;
+    if (isLoading) return <div>loading...</div>;
 
     return (
-      <div>
-        <Ticket />
-      </div>
+      // eslint-disable-next-line
+      <div>{tickets.map((ticket, i) => <Ticket {...ticket} key={i} />)}</div>
     );
   }
 }
