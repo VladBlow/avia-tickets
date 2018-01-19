@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-export const filterSelector = state => state.filter;
+export const filtersSelector = state => state.filters;
 
-export const filterByKeySelector = createSelector(
-  filterSelector,
+export const filtersByKeySelector = createSelector(
+  filtersSelector,
   filter => key => filter[key],
 );

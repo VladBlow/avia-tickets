@@ -1,2 +1,2 @@
 export { FilterC as Filter } from './container';
-export { filterReducer } from './ducks';
+export { filtersReducer } from './ducks';

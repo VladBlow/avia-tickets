@@ -1,37 +1,59 @@
-const SET_ONE_FILTER = 'filter/SET_ONE_FILTER';
-const SET_SOME_FILTER = 'filter/SET_SOME_FILTER';
+const TOGGLE_ONE_FILTER = 'filter/TOGGLE_ONE_FILTER';
+const TOGGLE_SOME_FILTERS = 'filter/TOGGLE_SOME_FILTER';
 
-export const setOneFilter = data => ({
-  type: SET_ONE_FILTER,
-  payload: data,
+export const toggleOneFilter = (id, status) => ({
+  type: TOGGLE_ONE_FILTER,
+  payload: id,
+  meta: status,
 });
 
-export const setSomeFilter = data => ({
-  type: SET_SOME_FILTER,
-  payload: data,
+export const toggleAllFilters = (array, status) => ({
+  type: TOGGLE_SOME_FILTERS,
+  payload: array,
+  meta: status,
 });
 
 const initialState = {
-  all: false,
-  without: false,
-  withOne: false,
-  withTwo: false,
-  withThree: false,
+  activeFilters: [],
 };
 
-export const filterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_ONE_FILTER:
-      return {
-        ...state,
-        [action.payload.key]: action.payload.value,
-      };
+const addElemToArray = (arr, el) =>
+  arr.indexOf(el) === -1 ? [...arr, el] : arr;
 
-    case SET_SOME_FILTER:
+const removeElemFromArray = (arr, el) =>
+  arr.indexOf(el) >= 0 ? arr.filter(item => item !== el) : arr;
+
+export const filtersReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case TOGGLE_ONE_FILTER: {
+      const newActiveFilters = action.meta
+        ? addElemToArray(state.activeFilters, action.payload)
+        : removeElemFromArray(state.activeFilters, action.payload);
+
       return {
         ...state,
-        ...action.payload,
+        activeFilters: newActiveFilters,
       };
+    }
+
+    case TOGGLE_SOME_FILTERS: {
+      let newFilters = state.activeFilters;
+
+      action.payload.reduce((acc, filter) => {
+        const newArrayByFilter = action.meta
+          ? addElemToArray(newFilters, filter)
+          : removeElemFromArray(newFilters, filter);
+
+        newFilters = newArrayByFilter;
+
+        return acc;
+      }, newFilters);
+
+      return {
+        ...state,
+        activeFilters: newFilters,
+      };
+    }
 
     default:
       return {

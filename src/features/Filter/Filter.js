@@ -22,77 +22,63 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 export class Filter extends Component {
-  handleOnChahge = ({ target: { checked } }, key) => {
-    const { setOneFilter, setSomeFilter } = this.props;
+  handleOnChahge = ({ target: { checked, name } }) => {
+    const number = +name;
+    const { toggleOneFilter, toggleSomeFilters } = this.props;
 
-    switch (key) {
-      case 'all': {
-        setSomeFilter({
-          all: checked,
-          without: checked,
-          withOne: checked,
-          withTwo: checked,
-          withThree: checked,
-        });
-        break;
-      }
-
-      case 'without': {
-        setSomeFilter({
-          without: checked,
-          withOne: false,
-          withTwo: false,
-          withThree: false,
-        });
+    switch (number) {
+      case -1: {
+        toggleSomeFilters([-1, 0, 1, 2, 3], checked);
         break;
       }
 
       default: {
-        setOneFilter({ key, value: checked });
+        toggleOneFilter(number, checked);
       }
     }
   };
 
   render() {
-    const { all, without, withOne, withTwo, withThree } = this.props;
-
-    // If we picked All/Without filter, we can't choose with transplant
-    const isDisableWithTransplant = all || without;
+    const { activeFilters } = this.props;
+    const isCheckedFunc = number => activeFilters.indexOf(number) !== -1;
+    const isCheckedAll = isCheckedFunc(-1);
+    const isChecked = stops => isCheckedAll || isCheckedFunc(stops);
 
     return (
       <Wrap>
         <Title>Количество пересадок</Title>
         <StyledCheckbox
-          checked={all}
-          onChange={e => this.handleOnChahge(e, 'all')}
+          checked={isCheckedAll}
+          name="-1"
+          onChange={this.handleOnChahge}
         >
           Все
         </StyledCheckbox>
         <StyledCheckbox
-          disabled={all}
-          checked={without}
-          onChange={e => this.handleOnChahge(e, 'without')}
+          name="0"
+          checked={isChecked(0)}
+          onChange={this.handleOnChahge}
         >
           Без пересадок
         </StyledCheckbox>
         <StyledCheckbox
-          disabled={isDisableWithTransplant}
-          checked={withOne}
-          onChange={e => this.handleOnChahge(e, 'withOne')}
+          name="1"
+          checked={isChecked(1)}
+          onChange={this.handleOnChahge}
         >
           1 пересадка
         </StyledCheckbox>
         <StyledCheckbox
-          disabled={isDisableWithTransplant}
-          checked={withTwo}
-          onChange={e => this.handleOnChahge(e, 'withTwo')}
+          name="2"
+          checked={isChecked(2)}
+          onChange={this.handleOnChahge}
         >
           2 пересадки
         </StyledCheckbox>
         <StyledCheckbox
-          disabled={isDisableWithTransplant}
-          checked={withThree}
-          onChange={e => this.handleOnChahge(e, 'withThree')}
+          name="3"
+          checked={isChecked(3)}
+          onChange={this.handleOnChahge}
         >
           3 пересадки
         </StyledCheckbox>

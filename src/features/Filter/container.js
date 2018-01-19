@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import { Filter } from './Filter';
-import { filterSelector } from './selectors';
-import { setOneFilter, setSomeFilter } from './ducks';
+import { filtersSelector } from './selectors';
+import { toggleOneFilter, toggleSomeFilters } from './ducks';
 
 const mapStateToProps = state => ({
-  ...filterSelector(state),
+  activeFilters: filtersSelector(state),
 });
 
 const mapDispatchToProps = {
-  setOneFilter,
-  setSomeFilter,
+  toggleOneFilter,
+  toggleSomeFilters,
 };
 
 export const FilterC = connect(mapStateToProps, mapDispatchToProps)(Filter);
