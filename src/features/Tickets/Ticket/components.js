@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Cart, Button, Icon } from 'components';
+import { Cart, Icon } from 'components';
 
-const Wrap = styled(Cart)`
+export const Wrap = styled(Cart)`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -14,7 +14,7 @@ const Wrap = styled(Cart)`
   }
 `;
 
-const Left = styled.div`
+export const Left = styled.div`
   width: 200px;
   padding: 23px 0;
   border-right: 1px solid #eceff1;
@@ -25,34 +25,34 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div`
+export const Right = styled.div`
   width: 365px;
   padding: 23px 25px;
 `;
 
-const Row = styled.div`
+export const Row = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
 `;
 
-const Time = styled.span`
+export const Time = styled.span`
   font-size: 32px;
   margin-bottom: 11px;
 `;
 
-const Airport = styled.span`
+export const Airport = styled.span`
   font-size: 12px;
   margin-bottom: 5px;
   height: ;
 `;
 
-const Date = styled.span`
+export const Date = styled.span`
   font-size: 12px;
   color: #8b9497;
 `;
 
-const Stops = styled.div`
+const StopsWrap = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -96,41 +96,9 @@ const getStopsText = number => {
   return `${number} пересад${endingWord}`;
 };
 
-const StopsS = ({ stops }) => (
-  <Stops>
+export const Stops = ({ stops }) => (
+  <StopsWrap>
     <StopsText>{getStopsText(stops)}</StopsText>
     <StopDestination />
-  </Stops>
-);
-
-export const Ticket = ticket => (
-  <Wrap withHover>
-    <Left>
-      <img
-        width="120"
-        height="35"
-        src="/static/img/turkish-air.png"
-        srcSet="/static/img/turkish-air@2x.png"
-        alt="Turkish Airlanes"
-      />
-      <Button>
-        Купить <br /> за {ticket.price} Р
-      </Button>
-    </Left>
-    <Right>
-      <Row>
-        <Time>{ticket.departure_time}</Time>
-        <StopsS stops={ticket.stops} />
-        <Time>{ticket.arrival_time}</Time>
-      </Row>
-      <Row>
-        <Airport>{`${ticket.origin}, ${ticket.origin_name}`}</Airport>
-        <Airport>{`${ticket.destination_name}, ${ticket.destination}`}</Airport>
-      </Row>
-      <Row>
-        <Date>{ticket.departure_date}</Date>
-        <Date>{ticket.arrival_date}</Date>
-      </Row>
-    </Right>
-  </Wrap>
+  </StopsWrap>
 );

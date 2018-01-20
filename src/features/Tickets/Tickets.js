@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import firebase from 'r/firebase';
-import { Ticket } from './Ticket';
+import { Ticket } from './Ticket/index';
 
 export class Tickets extends Component {
   componentDidMount() {
@@ -14,13 +14,22 @@ export class Tickets extends Component {
   }
 
   render() {
-    const { tickets, isLoading } = this.props;
+    const { tickets, isLoading, activeFilters } = this.props;
 
-    if (isLoading) return <div>loading...</div>;
+    if (isLoading) return <Fragment>loading...</Fragment>;
+
+    let filteredTickets = tickets.sort((a, b) => a.price - b.price);
+
+    if (activeFilters.length) {
+      filteredTickets = tickets.filter(
+        ({ stops }) => activeFilters.indexOf(stops) !== -1,
+      );
+    }
 
     return (
-      // eslint-disable-next-line
-      <div>{tickets.map((ticket, i) => <Ticket {...ticket} key={i} />)}</div>
+      <Fragment>
+        {filteredTickets.map((ticket, i) => <Ticket {...ticket} key={i} />)}
+      </Fragment>
     );
   }
 }

@@ -13,22 +13,43 @@ const Title = styled.p`
   letter-spacing: 0.7px;
 `;
 
+const OnlyButton = styled.button`
+  display: none;
+  border: none;
+  outline: none;
+  color: #3e9ce8;
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+`;
+
 const StyledCheckbox = styled(Checkbox)`
-  padding: 8px 15px;
+  padding: 8px 10px 8px 15px;
 
   :hover {
     background-color: #f1fcff;
+
+    ${OnlyButton} {
+      display: block;
+    }
   }
+`;
+
+const CheckboxText = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export class Filter extends Component {
   handleOnChahge = ({ target: { checked, name } }) => {
     const number = +name;
-    const { toggleOneFilter, toggleSomeFilters } = this.props;
+    const { pull, toggleOneFilter, toggleAllFilters } = this.props;
 
     switch (number) {
       case -1: {
-        toggleSomeFilters([-1, 0, 1, 2, 3], checked);
+        toggleAllFilters(pull, checked);
         break;
       }
 
@@ -39,10 +60,11 @@ export class Filter extends Component {
   };
 
   render() {
-    const { activeFilters } = this.props;
+    const { activeFilters, pull, toggleOnlyFilter } = this.props;
+
     const isCheckedFunc = number => activeFilters.indexOf(number) !== -1;
-    const isCheckedAll = isCheckedFunc(-1);
-    const isChecked = stops => isCheckedAll || isCheckedFunc(stops);
+    const isCheckedAll = activeFilters.length === pull.length;
+    const isChecked = stops => isCheckedFunc(stops);
 
     return (
       <Wrap>
@@ -52,35 +74,47 @@ export class Filter extends Component {
           name="-1"
           onChange={this.handleOnChahge}
         >
-          Все
+          <CheckboxText>Все</CheckboxText>
         </StyledCheckbox>
         <StyledCheckbox
           name="0"
           checked={isChecked(0)}
           onChange={this.handleOnChahge}
         >
-          Без пересадок
+          <CheckboxText>
+            Без пересадок
+            <OnlyButton onClick={() => toggleOnlyFilter(0)}>Только</OnlyButton>
+          </CheckboxText>
         </StyledCheckbox>
         <StyledCheckbox
           name="1"
           checked={isChecked(1)}
           onChange={this.handleOnChahge}
         >
-          1 пересадка
+          <CheckboxText>
+            1 пересадка
+            <OnlyButton onClick={() => toggleOnlyFilter(1)}>Только</OnlyButton>
+          </CheckboxText>
         </StyledCheckbox>
         <StyledCheckbox
           name="2"
           checked={isChecked(2)}
           onChange={this.handleOnChahge}
         >
-          2 пересадки
+          <CheckboxText>
+            2 пересадки
+            <OnlyButton onClick={() => toggleOnlyFilter(2)}>Только</OnlyButton>
+          </CheckboxText>
         </StyledCheckbox>
         <StyledCheckbox
           name="3"
           checked={isChecked(3)}
           onChange={this.handleOnChahge}
         >
-          3 пересадки
+          <CheckboxText>
+            3 пересадки
+            <OnlyButton onClick={() => toggleOnlyFilter(3)}>Только</OnlyButton>
+          </CheckboxText>
         </StyledCheckbox>
       </Wrap>
     );

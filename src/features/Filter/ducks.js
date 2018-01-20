@@ -1,5 +1,6 @@
 const TOGGLE_ONE_FILTER = 'filter/TOGGLE_ONE_FILTER';
-const TOGGLE_SOME_FILTERS = 'filter/TOGGLE_SOME_FILTER';
+const TOGGLE_ONLY_FILTER = 'filter/TOGGLE_ONLY_FILTER';
+const TOGGLE_ALL_FILTERS = 'filter/TOGGLE_ALL_FILTER';
 
 export const toggleOneFilter = (id, status) => ({
   type: TOGGLE_ONE_FILTER,
@@ -7,14 +8,20 @@ export const toggleOneFilter = (id, status) => ({
   meta: status,
 });
 
+export const toggleOnlyFilter = id => ({
+  type: TOGGLE_ONLY_FILTER,
+  payload: id,
+});
+
 export const toggleAllFilters = (array, status) => ({
-  type: TOGGLE_SOME_FILTERS,
+  type: TOGGLE_ALL_FILTERS,
   payload: array,
   meta: status,
 });
 
 const initialState = {
   activeFilters: [],
+  pull: [0, 1, 2, 3],
 };
 
 const addElemToArray = (arr, el) =>
@@ -36,22 +43,29 @@ export const filtersReducer = (state = initialState, action) => {
       };
     }
 
-    case TOGGLE_SOME_FILTERS: {
-      let newFilters = state.activeFilters;
+    case TOGGLE_ONLY_FILTER: {
+      return {
+        ...state,
+        activeFilters: [action.payload],
+      };
+    }
+
+    case TOGGLE_ALL_FILTERS: {
+      let newActiveFilters = state.activeFilters;
 
       action.payload.reduce((acc, filter) => {
         const newArrayByFilter = action.meta
-          ? addElemToArray(newFilters, filter)
-          : removeElemFromArray(newFilters, filter);
+          ? addElemToArray(newActiveFilters, filter)
+          : removeElemFromArray(newActiveFilters, filter);
 
-        newFilters = newArrayByFilter;
+        newActiveFilters = newArrayByFilter;
 
         return acc;
-      }, newFilters);
+      }, newActiveFilters);
 
       return {
         ...state,
-        activeFilters: newFilters,
+        activeFilters: newActiveFilters,
       };
     }
 
