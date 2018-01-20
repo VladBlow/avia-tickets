@@ -1,5 +1,5 @@
 const GET_TICKETS_START = 'tickets/GET_TICKETS_START';
-const GET_TICKETS_SUCCESS = 'tickets/GET_TICKETS_SUCCESS';
+export const GET_TICKETS_SUCCESS = 'tickets/GET_TICKETS_SUCCESS';
 const GET_TICKETS_FAILED = 'tickets/GET_TICKETS_FAILED';
 
 export const getTickets = () => ({

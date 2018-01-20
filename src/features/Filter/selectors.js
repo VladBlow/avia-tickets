@@ -11,8 +11,3 @@ export const pullFiltersSelector = createSelector(
   filtersSelector,
   filters => filters.pull,
 );
-
-export const filtersByKeySelector = createSelector(
-  filtersSelector,
-  filter => key => filter[key],
-);

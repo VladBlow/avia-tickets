@@ -1,3 +1,6 @@
+import { addElemToArray, removeElemFromArray } from './utils';
+import { GET_TICKETS_SUCCESS } from 'features/Tickets/ducks';
+
 const TOGGLE_ONE_FILTER = 'filter/TOGGLE_ONE_FILTER';
 const TOGGLE_ONLY_FILTER = 'filter/TOGGLE_ONLY_FILTER';
 const TOGGLE_ALL_FILTERS = 'filter/TOGGLE_ALL_FILTER';
@@ -24,12 +27,6 @@ const initialState = {
   pull: [0, 1, 2, 3],
 };
 
-const addElemToArray = (arr, el) =>
-  arr.indexOf(el) === -1 ? [...arr, el] : arr;
-
-const removeElemFromArray = (arr, el) =>
-  arr.indexOf(el) >= 0 ? arr.filter(item => item !== el) : arr;
-
 export const filtersReducer = (state = initialState, action) => {
   switch (action.type) {
     case TOGGLE_ONE_FILTER: {
@@ -40,6 +37,20 @@ export const filtersReducer = (state = initialState, action) => {
       return {
         ...state,
         activeFilters: newActiveFilters,
+      };
+    }
+
+    case GET_TICKETS_SUCCESS: {
+      const pull = action.payload.reduce((acc, ticket) => {
+        if (acc.indexOf(ticket.stops) === -1) {
+          acc = [...acc, ticket.stops];
+        }
+        return acc;
+      }, []);
+
+      return {
+        ...state,
+        pull: pull.sort((a, b) => a - b),
       };
     }
 
