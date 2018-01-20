@@ -9,7 +9,7 @@ SPA with React ecosystem:
 
 ## Quick start
 
-1. Yor should be install <a href="https://yarnpkg.com">yarn</a> or <a hfer="https://www.npmjs.com/">npm</a> and <a href="https://nodejs.org" a>node</a> in global.
+1. Yor should be install <a href="https://yarnpkg.com" target="_blank">yarn</a> or <a href="https://www.npmjs.com/" target="_blank">npm</a> and <a href="https://nodejs.org" target="_blank" a>node</a> in global.
 2. For dev build you can use `yarn start`
 3. For prod build you can use `yarn build`
 4. Enjoy it!
