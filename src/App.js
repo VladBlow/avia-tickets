@@ -6,7 +6,7 @@ import { Tickets } from 'features/Tickets';
 
 const Layout = styled.main`
   width: 818px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
 `;
 
 const LogoWrap = styled.div`
