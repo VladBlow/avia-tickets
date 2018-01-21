@@ -12,15 +12,20 @@ import {
   Date,
 } from './components';
 
+const listCarriers = {
+  tk: 'static/img/turkish-air.png',
+  su: 'static/img/aeroflot.png',
+  s7: 'static/img/s7.png',
+  ba: 'static/img/ba.png',
+};
+
 export const Ticket = ticket => (
   <Wrap withHover>
     <Left>
       <img
         width="120"
         height="35"
-        src="static/img/turkish-air.png"
-        srcSet="static/img/turkish-air@2x.png"
-        alt="Turkish Airlanes"
+        src={listCarriers[ticket.carrier.toLowerCase()]}
       />
       <Button>
         Купить <br /> за {ticket.price.toLocaleString()} Р
