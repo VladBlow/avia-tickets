@@ -7,5 +7,5 @@ const __svgsprite__ = {
 
 export const injectSprite = () =>
   loadSprite({
-    filename: `/${__svgsprite__.filename}`,
+    filename: `../public/${__svgsprite__.filename}`,
   });
