@@ -5,13 +5,8 @@ const webpack = require('webpack');
 const SvgStore = require('webpack-svgstore-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const hotMiddlewareScript =
-  'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
-
-module.exports = {
-  entry: {
-    bundle: ['babel-polyfill', './src/index.js', hotMiddlewareScript],
-  },
+module.exports = options => ({
+  entry: options.entry,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../public'),
@@ -36,11 +31,10 @@ module.exports = {
       components: path.join(__dirname, '../src/common/components'),
     },
   },
-  plugins: [
+  plugins: options.plugins.concat([
     new CleanWebpackPlugin([path.resolve(__dirname, '../public')]),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
     }),
     new CopyWebpackPlugin([
       {
@@ -67,6 +61,5 @@ module.exports = {
       },
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
-};
+  ]),
+});

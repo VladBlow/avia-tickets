@@ -13,8 +13,9 @@
   },
   "homepage": "https://github.com/VladBlow/avia-tickets#readme",
   "scripts": {
-    "build": "cross-env NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack/webpack.config --progress",
-    "start": "cross-env NODE_ENV=development node server",
+    "build":
+      "cross-env NODE_ENV=production ./node_modules/.bin/webpack --config ./webpack/webpack.prod --progress",
+    "start": "cross-env NODE_ENV=development node webpack/server",
     "lint": "./node_modules/.bin/eslint -- .",
     "test": "./node_modules/.bin/jest --coverage"
   },
@@ -34,6 +35,7 @@
     "redux-saga": "^0.16.0",
     "reselect": "^3.0.1",
     "styled-components": "^2.2.4",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack-svgstore-plugin": "^4.0.1"
   },
   "devDependencies": {
