@@ -6,6 +6,10 @@ const __svgsprite__ = {
 };
 
 export const injectSprite = () =>
-  loadSprite({
-    filename: `avia-tickets/public/${__svgsprite__.filename}`,
-  });
+  loadSprite(
+    process.env.NODE_ENV === 'production'
+      ? {
+          filename: `avia-tickets/public/${__svgsprite__.filename}`,
+        }
+      : __svgsprite__,
+  );
