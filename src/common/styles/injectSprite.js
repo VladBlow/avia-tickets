@@ -5,4 +5,7 @@ const __svgsprite__ = {
   name: 'sprite.svg',
 };
 
-export const injectSprite = () => loadSprite(__svgsprite__);
+export const injectSprite = () =>
+  loadSprite({
+    filename: `public/${__svgsprite__.filename}`,
+  });
