@@ -19,6 +19,7 @@
     "test": "./node_modules/.bin/jest --coverage"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^4.3.1",
     "cross-env": "^5.1.1",
     "date-fns": "^1.29.0",
     "express": "^4.16.2",

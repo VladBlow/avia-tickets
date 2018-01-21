@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const SvgStore = require('webpack-svgstore-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const hotMiddlewareScript =
   'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
@@ -37,6 +38,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([path.resolve(__dirname, '../public')]),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static'),
+        to: path.resolve(__dirname, '../public/static'),
+      },
+    ]),
     new HtmlWebpackPlugin({
       template: 'templates/index.html',
       filename: '../public/index.html',

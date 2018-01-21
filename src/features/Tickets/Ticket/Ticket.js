@@ -18,8 +18,8 @@ export const Ticket = ticket => (
       <img
         width="120"
         height="35"
-        src="/static/img/turkish-air.png"
-        srcSet="/static/img/turkish-air@2x.png"
+        src="static/img/turkish-air.png"
+        srcSet="static/img/turkish-air@2x.png"
         alt="Turkish Airlanes"
       />
       <Button>
